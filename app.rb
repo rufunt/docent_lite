@@ -1,6 +1,20 @@
 require 'rubygems'
 require 'sinatra'
 #require 'sinatra/reloader'
+require 'sqlite3'
+
+configure do
+	@db = SQLite3::Database.new 'doctor.db'
+	@db.execute 'create table if not exists
+		"Users"
+		(
+			"id" integer primary key autoincrement,
+			"username" text,
+			"phone" text,
+			"datestamp" text,
+			"doctor" text
+		)'
+end
 
 get '/' do
 	erb "Hello!"			
