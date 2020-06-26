@@ -3,9 +3,13 @@ require 'sinatra'
 #require 'sinatra/reloader'
 require 'sqlite3'
 
+def get_db
+	return SQLite3::Database.new 'doctor.db'
+end
+
 configure do
-	@db = SQLite3::Database.new 'doctor.db'
-	@db.execute 'create table if not exists
+	db = get_db
+	db.execute 'create table if not exists
 		"Users"
 		(
 			"id" integer primary key autoincrement,
@@ -50,9 +54,13 @@ post '/visit' do
 		return erb :visit
 	end
 
-	f = File.open "./public/users.txt", "a"
-	f.write "#{@username}, #{@phone}, #{@doctor}, #{@datetime} "
-	f.close
+	db = get_db
+
+	db.execute 'insert into Users (username, phone, datestamp, doctor)
+		values (?, ?, ?, ?)', [ @username, @phone, @datetime ,@doctor]
+	
+
+	
 	erb "#{@doctor}, #{@phone},  #{@datetime}; Спасибо, #{@username}, будем вас ожидать!"
 end
 
@@ -65,3 +73,5 @@ post '/contacts' do
 	f.close
 	erb :contacts
 end
+
+
