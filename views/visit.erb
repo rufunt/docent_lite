@@ -1,6 +1,8 @@
 <h3>Записаться</h3>
 <p>На этой странице вы можете записаться на прием: </p>
 
+
+
 <form action="/visit" method="post">
   <div class="form-group">
     <label>Ваше имя</label>
@@ -26,8 +28,18 @@
 
   <div class="form-group">
     <label>Когда вас ожидать?</label>
-    <input name="datetime" type="text" class="form-control" placeholder="Введите дату и время" value="<%= @datetime%>">
+    <input id="datetimepicker" name="datetime" type="text" class="form-control" placeholder="Введите дату и время" value="<%= @datetime%>">
   </div>
   
   <button type="submit" class="btn btn-primary">Записаться</button>
 </form>
+
+<script type="text/javascript">
+
+  // $(function() {
+  //   $('#datetimepicker').datetimepicker();
+  // });
+  
+  jQuery('#datetimepicker').datetimepicker();
+
+</script>

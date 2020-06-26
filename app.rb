@@ -68,9 +68,6 @@ post '/contacts' do
 	@email = params[:email]
 	@message = params[:message]
 
-	f = File.open "./public/contacts.txt", "a"
-	f.write "#{@email}, #{@message} "
-	f.close
 	erb :contacts
 end
 
