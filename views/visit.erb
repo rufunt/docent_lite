@@ -15,9 +15,9 @@
   <div class="form-group">
     <label>Выбрать врача</label>
     <select name="doctor" class="form-control">
-      <option>Врач ортопед</option>
-      <option>Хирург</option>
-      <option>Детский врач</option>
+      <option <%= @doctor == "Врач ортопед" ? 'selected' : '' %>>Врач ортопед</option>
+      <option <%= @doctor == "Хирург" ? 'selected' : '' %>>Хирург</option>
+      <option <%= @doctor == "Детский врач" ? 'selected' : '' %>>Детский врач</option>
       
     </select>
   </div>
