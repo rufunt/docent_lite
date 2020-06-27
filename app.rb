@@ -4,7 +4,9 @@ require 'sinatra'
 require 'sqlite3'
 
 def get_db
-	return SQLite3::Database.new 'doctor.db'
+	db = SQLite3::Database.new 'doctor.db'
+	db.results_as_hash = true
+	return db
 end
 
 configure do
@@ -62,6 +64,13 @@ post '/visit' do
 
 	
 	erb "#{@doctor}, #{@phone},  #{@datetime}; Спасибо, #{@username}, будем вас ожидать!"
+end
+
+get '/users' do
+	@db = get_db
+	
+	@users = @db.execute 'select * from Users'
+	erb :users
 end
 
 post '/contacts' do
