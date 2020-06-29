@@ -66,11 +66,11 @@ post '/visit' do
 	erb "#{@doctor}, #{@phone},  #{@datetime}; Спасибо, #{@username}, будем вас ожидать!"
 end
 
-get '/users' do
-	@db = get_db
+get '/showusers' do
+	db = get_db
 	
-	@users = @db.execute 'select * from Users'
-	erb :users
+	@users = db.execute 'select * from Users'
+	erb :showusers
 end
 
 post '/contacts' do
