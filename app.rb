@@ -69,7 +69,7 @@ end
 get '/showusers' do
 	db = get_db
 	
-	@users = db.execute 'select * from Users'
+	@users = db.execute 'select * from Users order by id desc'
 	erb :showusers
 end
 
