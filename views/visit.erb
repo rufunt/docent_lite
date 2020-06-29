@@ -17,14 +17,12 @@
   <div class="form-group">
     <label>Выбрать врача</label>
     <select name="doctor" class="form-control">
-      <option <%= @doctor == "Врач ортопед" ? 'selected' : '' %>>Врач ортопед</option>
-      <option <%= @doctor == "Хирург" ? 'selected' : '' %>>Хирург</option>
-      <option <%= @doctor == "Детский врач" ? 'selected' : '' %>>Детский врач</option>
+      <% @doctors.each do |item|%>
+        <option <%= @doctor == item['name'] ? 'selected' : '' %>><%= item['name'] %></option>
+      <% end %>
       
     </select>
   </div>
-
-  
 
   <div class="form-group">
     <label>Когда вас ожидать?</label>

@@ -21,6 +21,11 @@ def seed_db db, doctors
 	end
 end
 
+before do
+	db = get_db
+	@doctors = db.execute 'select * from Doctors'
+end
+
 configure do
 	db = get_db
 	db.execute 'create table if not exists
@@ -78,6 +83,7 @@ post '/visit' do
 	end
 
 	db = get_db
+	
 
 	db.execute 'insert into Users (username, phone, datestamp, doctor)
 		values (?, ?, ?, ?)', [ @username, @phone, @datetime ,@doctor]
@@ -89,6 +95,7 @@ end
 
 get '/showusers' do
 	db = get_db
+	
 	
 	@users = db.execute 'select * from Users order by id desc'
 	erb :showusers
