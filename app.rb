@@ -9,6 +9,18 @@ def get_db
 	return db
 end
 
+def is_doctor_exists? db, name
+	db.execute('select * from Doctors where name=?', [name]).length > 0
+end
+
+def seed_db db, doctors
+	doctors.each do |doctor|
+		if !is_doctor_exists? db, doctor
+			db.execute 'insert into Doctors (name) values (?)', [doctor]
+		end
+	end
+end
+
 configure do
 	db = get_db
 	db.execute 'create table if not exists
@@ -20,6 +32,15 @@ configure do
 			"datestamp" text,
 			"doctor" text
 		)'
+
+		db.execute 'create table if not exists
+		"Doctors"
+		(
+			"id" integer primary key autoincrement,
+			"name" text
+		)'
+
+	seed_db db, ['Врач ортопед', 'Детский врач', 'Хирург']	
 end
 
 get '/' do
