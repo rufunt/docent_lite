@@ -1,6 +1,6 @@
 require 'rubygems'
 require 'sinatra'
-#require 'sinatra/reloader'
+require 'sinatra/reloader'
 require 'sqlite3'
 
 def get_db
@@ -90,7 +90,7 @@ post '/visit' do
 	
 
 	
-	erb "#{@doctor}, #{@phone},  #{@datetime}; Спасибо, #{@username}, будем вас ожидать!"
+	erb "Спасибо, #{@username}, запись была осуществлена, ваши данные получены! Ждем вас #{@datetime}."
 end
 
 get '/showusers' do
